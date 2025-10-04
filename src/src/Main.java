@@ -78,6 +78,7 @@ public class Main {
         }
     }
 
+
     public static void inscrever(ArrayList<Evento> eventos, Usuario usuario) {
         Scanner scInsc = new Scanner(System.in);
         escolherDia(eventos);
