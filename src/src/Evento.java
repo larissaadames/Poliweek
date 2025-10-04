@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Evento {
@@ -11,7 +12,7 @@ public class Evento {
     protected String horario;
     protected int dia;
     protected int totalVagas;
-    protected ArrayList<Usuario> inscritos;
+    protected ArrayList<Usuario> inscritos = new ArrayList<>();
     protected String tipo;
 
     public Evento(String curso, String titulo, String local, String centroAcademico, String descricao, String dtEvento,
@@ -27,6 +28,7 @@ public class Evento {
         this.centroAcademico = centroAcademico;
         this.dia = dia;
     }
+
 
     public String getCurso() {
         return curso;
@@ -70,6 +72,28 @@ public class Evento {
 
     public int getDia() {
         return dia;
+    }
+
+    public void addInscrito(Usuario usuario) {
+        this.inscritos.add(usuario);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "curso='" + curso + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", local='" + local + '\'' +
+                ", centroAcademico='" + centroAcademico + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", dtEvento='" + dtEvento + '\'' +
+                ", horario='" + horario + '\'' +
+                ", dia=" + dia +
+                ", totalVagas=" + totalVagas +
+                ", inscritos=" + inscritos +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }
 

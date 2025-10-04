@@ -2,22 +2,38 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    Palestra palestraJoao = new Palestra("Sistemas de Informação", "Fazendo códigos legais", "Auditório logo ali",
-             "blablalba", "30/09/2025", "19:00", 220, "Palestra",
-    "João Silva", 1);
-
-    MesaRedonda mesaPaula = new MesaRedonda("Ciência da computação", "Perguntando perguntas", "Auditório pra lá", "Bliblibli",
-            "01/09/2025", "21:00", 46, "Mesa redonda",
-    "Paula", 2);
-
-    Oficina oficinaJorge = new Oficina("Cibersegurança", "Oficina não mecanica", "Auditório vira ali", "Blublublu",
-            "02/09/2025", "19;00", 400, "Oficina", "Programação orientada a coisa=inhas", 3, "Jorge");
-
-    public static ArrayList<Evento> eventos = new ArrayList<>();
-
     public static void main(String[] args) {
 
+        // Feito por Larissa Adames, Davi Cagnato, Luis Felipe Quintiliano
+        // Poliweek, perspectiva do usuário
 
+        ArrayList<Evento> eventos = new ArrayList<Evento>();
+        ArrayList<Palestra> palestras = new ArrayList<>();
+
+        Usuario usuario = new Usuario("quintiliano","23/09/2006","123123123-12","41-40228922",
+                "quintilianoemail123@gmail.com");
+
+
+        Palestra palestraJoao = new Palestra(
+                "Sistemas de Informação", "Fazendo códigos legais", "Auditório logo ali",
+                "BSI", "blablalba", "30/09/2025", "19:00", 220, "Palestra",
+                "João Silva", 1
+        );
+
+        MesaRedonda mesaPaula = new MesaRedonda(
+                "Ciência da Computação", "Perguntando perguntas", "Auditório pra lá",
+                "CC", "Bliblibli", "01/09/2025", "21:00", 46, "Mesa redonda",
+                "Paula", 2
+        );
+
+        Oficina oficinaJorge = new Oficina(
+                "Cibersegurança", "Oficina não mecânica", "Auditório vira ali",
+                "CiberSec", "Blublublu", "02/09/2025", "19:00", 400, "Oficina",
+                "Programação orientada a coisinhas", 3, "Jorge"
+        );
+        eventos.add(palestraJoao);
+        eventos.add(mesaPaula);
+        eventos.add(oficinaJorge);
         Scanner sc = new Scanner(System.in);
 
         int opcao = 0;
@@ -29,15 +45,15 @@ public class Main {
                     4. Sair
                     """);
 
-            System.out.println("Escolha o dia: ");
+            System.out.println("Escolha a opção: ");
             opcao = sc.nextInt();
 
             switch (opcao){
                 case 1:
-                    inscricoes();
+                    inscricoes(usuario);
                     break;
                 case 2:
-                    escolherDia(eventos);
+                    inscrever(eventos, usuario);
                     break;
                 case 3:
                     perfil();
@@ -48,41 +64,37 @@ public class Main {
         }
 
     }
-    public static void inscricoes(){
-
+    public static void inscricoes(Usuario usuario){
+        usuario.printMinhasInscricoes();
     }
     public static void escolherDia(ArrayList<Evento> eventos){
         Scanner scDia = new Scanner(System.in);
         System.out.println("Escolha o dia: ");
-        int dia = 0;
-        switch (dia){
-            case 1:
-                System.out.println("Eventos do dia 1: ");
-                for(Evento evento : eventos){
-                    if (evento.getDia() == 1){
-                        System.out.println(evento);
-                    }
-                }
-                break;
-            case 2:
-                System.out.println("Eventos do dia 2: ");
-                for(Evento evento : eventos){
-                    if (evento.getDia() == 2){
-                        System.out.println(evento);
-                    }
-                }
-                break;
-            case 3:
-                System.out.println("Eventos do dia 3: ");
-                for(Evento evento : eventos){
-                    if (evento.getDia() == 3){
-                        System.out.println(evento);
-                    }
-                }
-                break;
+        int dia = scDia.nextInt();
 
+        System.out.println("Eventos do dia " + dia + ": ");
+        for(Evento evento : eventos)
+        {
+            if (evento.getDia() == dia)
+            {
+                System.out.println(evento.toString());
+            }
         }
-        dia = scDia.nextInt();
+    }
+
+    public static void inscrever(ArrayList<Evento> eventos, Usuario usuario) {
+        Scanner scInsc = new Scanner(System.in);
+        escolherDia(eventos);
+
+        System.out.println("Digite o titulo da palestra que deseja se inscrever: ");
+        String titulo = scInsc.nextLine();
+
+        for(Evento evento : eventos) {
+            if (titulo.equals(evento.getTitulo())) {
+                evento.addInscrito(usuario);
+                usuario.addEvento(evento);
+            }
+        }
 
     }
     public static void perfil(){
