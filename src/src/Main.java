@@ -37,12 +37,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int opcao = 0;
-        while (opcao != 4 ){
+        while (opcao != 3){
             System.out.println("""
                     1. Minhas inscrições
                     2. Inscrever-se
-                    3. Ver perfil
-                    4. Sair
+                    3. Sair
                     """);
 
             System.out.println("Escolha a opção: ");
@@ -54,9 +53,6 @@ public class Main {
                     break;
                 case 2:
                     inscrever(eventos, usuario);
-                    break;
-                case 3:
-                    perfil();
                     break;
                 default:
                     System.out.println("Opção inválida");
@@ -95,9 +91,6 @@ public class Main {
                 usuario.addEvento(evento);
             }
         }
-
-    }
-    public static void perfil(){
 
     }
 }
